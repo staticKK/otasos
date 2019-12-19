@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jointcorp.otasos.mapper.DeviceMapper">
+
+    <insert id="update1">
+        update device set firmwareName = #{firmwareName},version = #{version},updateTime=#{updateTime} where deviceName=#{deviceName}
+    </insert>
+
+    <insert id="insertNewType">
+        insert into device(deviceName,version,info) values(#{deviceName},0,#{info})
+    </insert>
+
+    <select id="selectByType" resultType="com.jointcorp.otasos.entity.Device">
+        select * from device where deviceName=#{deviceName}
+    </select>
+
+</mapper>
