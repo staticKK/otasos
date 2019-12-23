@@ -44,9 +44,9 @@ public interface DeviceService {
     /**
      * 绑定设备
      * @param uid
-     * @param mac
+     * @param serialNumber
      * @return
      * @throws Exception
      */
-    MessageResult bindDevice(Long uid, String mac,String state) throws Exception;
+    MessageResult bindDevice(Long uid, String serialNumber,String state) throws Exception;
 }

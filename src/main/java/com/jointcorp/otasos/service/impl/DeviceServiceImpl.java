@@ -73,14 +73,14 @@ public class DeviceServiceImpl implements DeviceService {
     }
 
     @Override
-    public MessageResult bindDevice(Long uid, String mac,String state) throws Exception {
+    public MessageResult bindDevice(Long uid, String serialNumber,String state) throws Exception {
         Example example = new Example(DeviceBindInfo.class);
-        example.createCriteria().andEqualTo("mac",mac);
+        example.createCriteria().andEqualTo("serialNumber",serialNumber);
         DeviceBindInfo bindInfo = selectOneDeviceBindInfo(example);
 
         if("bind".equals(state)) {
             if(bindInfo == null) {
-                bindInfo = new DeviceBindInfo(uid,mac,"bind");
+                bindInfo = new DeviceBindInfo(uid,serialNumber,"bind");
                 deviceBindMapper.insert(bindInfo);
                 return MsgInterpreter.success();
             } else if("bind".equals(bindInfo.getState())) {

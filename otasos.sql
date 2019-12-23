@@ -58,7 +58,7 @@ CREATE TABLE `history_sos` (
 CREATE TABLE `device_bind_info` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `uid` bigint(20) DEFAULT NULL,
-  `mac` varchar(32) DEFAULT NULL,
+  `serial_number` varchar(64) DEFAULT NULL,
   `state` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;

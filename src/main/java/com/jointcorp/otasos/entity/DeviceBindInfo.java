@@ -9,15 +9,15 @@ public class DeviceBindInfo {
     @Id
     private Long id;
     private Long uid;
-    private String mac;
+    private String serialNumber;
     private String state;
 
     public DeviceBindInfo() {
     }
 
-    public DeviceBindInfo(Long uid, String mac, String state) {
+    public DeviceBindInfo(Long uid, String serialNumber, String state) {
         this.uid = uid;
-        this.mac = mac;
+        this.serialNumber = serialNumber;
         this.state = state;
     }
 
@@ -37,12 +37,12 @@ public class DeviceBindInfo {
         this.uid = uid;
     }
 
-    public String getMac() {
-        return mac;
+    public String getSerialNumber() {
+        return serialNumber;
     }
 
-    public void setMac(String mac) {
-        this.mac = mac;
+    public void setSerialNumber(String serialNumber) {
+        this.serialNumber = serialNumber;
     }
 
     public String getState() {

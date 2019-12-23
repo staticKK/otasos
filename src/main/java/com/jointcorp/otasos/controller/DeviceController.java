@@ -61,14 +61,14 @@ public class DeviceController{
 
     @PostMapping("/bindDevice")
     @ResponseBody
-    public MessageResult bindDevice(Long uid,String mac,@RequestParam(value = "state",defaultValue = "bind") String state) throws Exception {
+    public MessageResult bindDevice(Long uid,String serialNumber,@RequestParam(value = "state",defaultValue = "bind") String state) throws Exception {
         if(uid == null || uid == 0) {
             return MsgInterpreter.build(Constants.PARAMERR_STATUS_ERROR,"用户ID不能为null或者0");
         }
-        if(StringUtils.isBlank(mac)) {
-            return MsgInterpreter.build(Constants.PARAMERR_STATUS_ERROR,"MAC地址不能为空");
+        if(StringUtils.isBlank(serialNumber)) {
+            return MsgInterpreter.build(Constants.PARAMERR_STATUS_ERROR,"序列号不能为空");
         }
-        return deviceService.bindDevice(uid,mac.toLowerCase(),state);
+        return deviceService.bindDevice(uid,serialNumber.toLowerCase(),state);
     }
 
 }
