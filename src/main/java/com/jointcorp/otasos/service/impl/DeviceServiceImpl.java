@@ -73,29 +73,38 @@ public class DeviceServiceImpl implements DeviceService {
     }
 
     @Override
-    public MessageResult bindDevice(Long uid, String serialNumber,String state) throws Exception {
+    public MessageResult bindDevice(Long uid, String serialNumber,String reqType) throws Exception {
         Example example = new Example(DeviceBindInfo.class);
         example.createCriteria().andEqualTo("serialNumber",serialNumber);
         DeviceBindInfo bindInfo = selectOneDeviceBindInfo(example);
 
-        if("bind".equals(state)) {
+        /*
+         1.如果设备没有绑定，直接绑定
+         2.如果设备已绑定，并且uid和系统uid相同，直接返回绑定成功，如果uid和系统uid不同，提示app解绑
+         */
+        if("bind".equals(reqType)) {
             if(bindInfo == null) {
                 bindInfo = new DeviceBindInfo(uid,serialNumber,"bind");
                 deviceBindMapper.insert(bindInfo);
                 return MsgInterpreter.success();
-            } else if("bind".equals(bindInfo.getState())) {
+            }
+            if("bind".equals(bindInfo.getState())) {
+                if(bindInfo.getUid().longValue() != uid.longValue()) {
                     return MsgInterpreter.build(Constants.DEVICE_BIND);
-            } else {
+                } else {
+                    return MsgInterpreter.success();
+                }
+            }
+            else {
                 bindInfo.setState("bind");
                 bindInfo.setUid(uid);
                 deviceBindMapper.updateByPrimaryKey(bindInfo);
                 return MsgInterpreter.success();
             }
 
-        } else if("unbind".equals(state)) {
+        } else if("unbind".equals(reqType)) {
             if(bindInfo != null) {
-                bindInfo.setState("unbind");
-                deviceBindMapper.updateByPrimaryKey(bindInfo);
+                deviceBindMapper.deleteByPrimaryKey(bindInfo.getId());
                 return MsgInterpreter.success();
             }
         }

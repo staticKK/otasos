@@ -20,7 +20,7 @@ public enum Constants {
 
     DATA_NULL(1122,"请求数据不存在"),
     CONTACTS_EXIST(1017,"联系人已经存在"),
-    DEVICE_BIND(1400,"设备已经被绑定");
+    DEVICE_BIND(1400,"设备已经被其他用户绑定");
 
 
     private int code;
