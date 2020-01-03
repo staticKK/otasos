@@ -105,10 +105,8 @@ public class DeviceServiceImpl implements DeviceService {
         } else if("unbind".equals(reqType)) {
             if(bindInfo != null) {
                 deviceBindMapper.deleteByPrimaryKey(bindInfo.getId());
-                return MsgInterpreter.success();
-            } else {
-                return MsgInterpreter.success();
             }
+            return MsgInterpreter.success();
         }
         return MsgInterpreter.build(Constants.PARAMERR_STATUS_ERROR,"非法的state状态值");
     }
