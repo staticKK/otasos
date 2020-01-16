@@ -90,7 +90,7 @@ public class DeviceServiceImpl implements DeviceService {
             }
             if("bind".equals(bindInfo.getState())) {
                 if(bindInfo.getUid().longValue() != uid.longValue()) {
-                    return MsgInterpreter.build(Constants.DEVICE_BIND);
+                    return MsgInterpreter.error(Constants.DEVICE_BIND);
                 } else {
                     return MsgInterpreter.success();
                 }
